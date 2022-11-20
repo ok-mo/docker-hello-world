@@ -1,4 +1,4 @@
-name: CI
+name: Docker Hub
 
 on:
   push:
@@ -65,11 +65,6 @@ jobs:
         push: true
         tags: ${{ steps.meta_ci.outputs.tags }}
         labels: ${{ steps.meta_ci.outputs.labels }}
-    
-    # Enable tmate debugging if previous step fails
-    - name: Setup tmate session if Build CI docker image step fails
-      if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v3
 
     - name: Login to DockerHub
       if: ${{ github.event_name != 'pull_request' }}
